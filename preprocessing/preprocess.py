@@ -13,7 +13,7 @@ def load_data(path):
     # Auto-detect and parse a date column, set as index
     for col in df.columns:
         if 'date' in col.lower():
-            df[col] = pd.to_datetime(df[col])
+            df[col] = pd.to_datetime(df[col], utc=True)
             df.set_index(col, inplace=True)
             df.sort_index(inplace=True)
             break
