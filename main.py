@@ -14,7 +14,7 @@ def run_simulation(data_path="data/stock_data.csv", epochs=3, window=10, initial
 
     features = df[['Open', 'High', 'Low', 'Close', 'Volume', 'SMA', 'EMA']].values
     prices = df['Close'].values
-    dates = df.index.astype(str).tolist()
+    dates = df.index.strftime('%Y-%m-%d').tolist()
 
     scaler = MinMaxScaler()
     features_scaled = scaler.fit_transform(features)

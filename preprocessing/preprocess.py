@@ -13,17 +13,19 @@ def load_data(path):
     # Auto-detect and parse a date column, set as index
     for col in df.columns:
         if 'date' in col.lower():
-            df[col] = pd.to_datetime(df[col], utc=True)
-            df.set_index(col, inplace=True)
-            df.sort_index(inplace=True)
+            parsed = pd.to_datetime(df[col], utc=True)
+            df = df.drop(columns=[col])
+            df.index = parsed
+            df.index.name = 'Date'
+            df = df.sort_index()
             break
 
-    df.dropna(inplace=True)
+    df = df.dropna()
     return df
 
 def add_indicators(df):
     df = df.copy()
     df["SMA"] = df["Close"].rolling(5).mean()
     df["EMA"] = df["Close"].ewm(span=5).mean()
-    df.dropna(inplace=True)
+    df = df.dropna()
     return df
