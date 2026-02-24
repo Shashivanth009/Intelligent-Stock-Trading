@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Stock Trading</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="glass-panel header">
+            <h1>Intelligent Stock Trading</h1>
+            <p>AI-Powered Price Prediction & Auto-Trading</p>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Sidebar: Configuration -->
+            <aside class="glass-panel config-panel">
+                <h2>Configuration</h2>
+
+                <div class="input-group">
+                    <label>Upload Dataset (CSV)</label>
+                    <div class="file-upload-wrapper" id="drop-area">
+                        <p>Drag & Drop or Click</p>
+                        <input type="file" id="fileInput" accept=".csv" hidden>
+                        <span id="fileName">stock_data.csv (Default)</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="epochs">Training Epochs</label>
+                    <input type="number" id="epochs" value="3" min="1" max="50">
+                </div>
+
+                <div class="input-group">
+                    <label for="window">Window Size (Days)</label>
+                    <input type="number" id="window" value="10" min="5" max="60">
+                </div>
+
+                <div class="input-group">
+                    <label for="balance">Initial Capital (₹)</label>
+                    <input type="number" id="balance" value="10000" step="1000">
+                </div>
+
+                <button id="trainBtn" class="btn-primary">
+                    Start Simulation
+                </button>
+            </aside>
+
+            <!-- Main Content: Charts & Metrics -->
+            <section class="content-area">
+                <!-- Metrics Row -->
+                <div class="metrics-row">
+                    <div class="glass-card metric-card">
+                        <h3>Net Profit</h3>
+                        <p id="netProfit">₹0.00</p>
+                    </div>
+                    <div class="glass-card metric-card">
+                        <h3>ROI</h3>
+                        <p id="roi">0.00%</p>
+                    </div>
+                    <div class="glass-card metric-card">
+                        <h3>Final Value</h3>
+                        <p id="finalValue">₹0.00</p>
+                    </div>
+                    <div class="glass-card metric-card">
+                        <h3>Trades</h3>
+                        <p id="totalTrades">0</p>
+                    </div>
+                    <div class="glass-card metric-card">
+                        <h3>Sharpe Ratio</h3>
+                        <p id="sharpeRatio">0.00</p>
+                    </div>
+                    <div class="glass-card metric-card">
+                        <h3>Max Drawdown</h3>
+                        <p id="maxDrawdown">0.00%</p>
+                    </div>
+                </div>
+
+                <!-- Chart Controls -->
+                <div class="glass-panel controls-panel">
+                    <div class="control-group">
+                        <label>Chart Type:</label>
+                        <div class="btn-group">
+                            <button id="btnLine" class="btn-toggle active">Line</button>
+                            <button id="btnCandle" class="btn-toggle">Candle</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Overlays:</label>
+                        <div class="checkbox-group">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="checkPrediction" checked>
+                                <span class="checkmark"></span> Prediction
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="checkSMA">
+                                <span class="checkmark"></span> SMA (5)
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="checkEMA">
+                                <span class="checkmark"></span> EMA (5)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="glass-panel chart-panel">
+                    <h2>Market Analysis</h2>
+                    <div id="stockChart" class="chart-container"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
